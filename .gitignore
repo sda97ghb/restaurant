@@ -1,0 +1,9 @@
+# Project exclude paths
+/venv/
+/.idea/
+__pycache__/
+db.sqlite3
+/staticfiles/
+/mediafiles/
+.env
+.coverage
