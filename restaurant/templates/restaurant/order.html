@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant</title>
+</head>
+<body>
+
+<h2>Total price</h2>
+{{ total_price }}
+
+<h2>Dishes</h2>
+<ul>
+    {% for dish in dishes %}
+    <li>{{ dish }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Allergens</h2>
+
+<ul>
+    {% for allergen in allergens %}
+    <li>{{ allergen }}</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
