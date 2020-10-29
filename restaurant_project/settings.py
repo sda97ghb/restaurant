@@ -76,11 +76,12 @@ WSGI_APPLICATION = "restaurant_project.wsgi.application"
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    "default": dj_database_url.config(conn_max_age=600, ssl_require=True)
+    "default": dj_database_url.config(conn_max_age=600, ssl_require=False)
 }
 for db in DATABASES.values():
     if db.get("ENGINE") == "django.db.backends.sqlite3":
-        del db["OPTIONS"]["sslmode"]
+        if "OPTIONS" in db and "sslmode" in db["OPTIONS"]:
+            del db["OPTIONS"]["sslmode"]
 
 
 # Password validation
