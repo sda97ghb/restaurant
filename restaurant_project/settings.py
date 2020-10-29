@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "djmoney",
     "restaurant",
 ]
 
@@ -125,3 +126,14 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "mediafiles"
+
+
+# Money
+# https://django-money.readthedocs.io/en/latest/
+
+CURRENCIES = ("RUB", "EUR", "USD")
+CURRENCY_CHOICES = [
+    ("RUB", "Руб. ₽"),
+    ("EUR", "EUR €"),
+    ("USD", "USD $"),
+]
