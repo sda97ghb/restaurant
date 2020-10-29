@@ -163,3 +163,9 @@ LOGGING = {
         }
     }
 }
+
+
+# Pastebin
+# https://pastebin.com/doc_api
+
+PASTEBIN_API_DEV_KEY = os.environ["PASTEBIN_API_DEV_KEY"]
