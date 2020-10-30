@@ -22,4 +22,5 @@ app_name = "restaurant"
 urlpatterns = [
     path("", views.index, name="index"),
     path("order/", views.order, name="order"),
+    path("pastebin/", views.CreatePasteView.as_view(), name="pastebin")
 ]

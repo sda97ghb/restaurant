@@ -5,6 +5,10 @@
     <title>Restaurant</title>
 </head>
 <body>
+<form action="{% url 'restaurant:pastebin' %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Pastebin">
+</form>
 <form action="{% url 'restaurant:order' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}

@@ -169,3 +169,10 @@ LOGGING = {
 # https://pastebin.com/doc_api
 
 PASTEBIN_API_DEV_KEY = os.environ["PASTEBIN_API_DEV_KEY"]
+
+
+# Celery
+# https://docs.celeryproject.org/en/stable/userguide/configuration.html
+
+CELERY_BROKER_URL = os.environ["CELERY_BROKER_URL"]
+CELERY_RESULT_BACKEND = os.environ["CELERY_RESULT_BACKEND"]

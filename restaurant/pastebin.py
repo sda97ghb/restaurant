@@ -38,7 +38,6 @@ def create_paste(code, *, dev_key=None, user_key=None, name=None, format=None, p
     :return: url of created paste
     """
     api_dev_key = settings.PASTEBIN_API_DEV_KEY if dev_key is None else dev_key
-    private = str(private)
 
     # Required
     data = {
@@ -55,7 +54,7 @@ def create_paste(code, *, dev_key=None, user_key=None, name=None, format=None, p
     if format is not None:
         data["api_paste_format"] = format
     if private is not None:
-        data["api_paste_private"] = private
+        data["api_paste_private"] = str(private)
     if expire is not None:
         data["api_paste_expire_date"] = expire
 

@@ -1,9 +1,12 @@
+from celery.result import AsyncResult
+from django.http import JsonResponse
 from django.template.response import TemplateResponse
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.decorators.http import require_GET, require_POST
 from django.views.generic import FormView
 
-from restaurant import models
+from restaurant import tasks
 from restaurant.forms import IndexForm
 
 
@@ -29,3 +32,25 @@ class IndexView(FormView):
 
 index = require_GET(IndexView.as_view())
 order = require_POST(IndexView.as_view())
+
+
+class CreatePasteView(View):
+    def get(self, request):
+        task_id = request.GET["task_id"]
+        res = AsyncResult(task_id)
+        data = {
+            "id": task_id,
+            "status": res.status,
+            "result": str(res.result),
+        }
+        print(data)
+        return JsonResponse(data)
+
+    def post(self, request):
+        res = tasks.create_paste.delay("foo bar qwe")
+        return TemplateResponse(request, "restaurant/paste.html", context={
+            "task_id": res.id
+        })
+        # return JsonResponse({
+        #     "id": res.id
+        # })

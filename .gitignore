@@ -7,5 +7,4 @@ db.sqlite3
 /mediafiles/
 .env
 .coverage
-db_secrets.env
-web_secrets.env
+*_secrets.env

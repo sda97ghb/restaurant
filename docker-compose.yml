@@ -13,6 +13,18 @@ services:
       - restaurant_network
     depends_on:
       - db
+      - celery
+
+  celery:
+    build: .
+    command: ["celery", "-A", "restaurant_project", "worker", "--loglevel=INFO"]
+    env_file:
+      - web.env
+      - web_secrets.env
+    networks:
+      - restaurant_network
+    depends_on:
+      - rabbitmq
 
   db:
     image: postgres:13
@@ -24,9 +36,21 @@ services:
     volumes:
       - db_volume:/var/lib/postgresql/data
 
+  rabbitmq:
+    image: rabbitmq:3.8.9
+    env_file:
+      - rabbitmq.env
+      - rabbitmq_secrets.env
+    hostname: my-rabbit
+    networks:
+      - restaurant_network
+    volumes:
+      - rabbitmq_volume:/var/lib/rabbitmq
+
 networks:
   restaurant_network:
     driver: bridge
 
 volumes:
   db_volume:
+  rabbitmq_volume:
