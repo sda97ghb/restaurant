@@ -26,8 +26,11 @@ class DishSerializer(ModelSerializer):
             if "allergens" in data:
                 data = data.copy()  # data can be an immutable QueryDict
                 allergens = data.getlist("allergens")
-                if len(allergens) == 1 and type(allergens[0]) == str and re.match(r"[0-9]+(,[0-9]+)*", allergens[0]):
-                    allergens = list(map(int, data["allergens"].split(",")))
+                if len(allergens) == 1 and type(allergens[0]) == str:
+                    if re.match(r"[0-9]+(,[0-9]+)*", allergens[0]):
+                        allergens = list(map(int, data["allergens"].split(",")))
+                    elif len(allergens[0]) == 0:
+                        allergens = []
                     data.setlist("allergens", allergens)
         return data
 

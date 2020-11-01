@@ -29,9 +29,11 @@ class CreateDishForm {
             "nutritional_value": this.nutritional_value.val(),
             "price": this.price.val(),
             "price_currency": this.price_currency.val(),
-            "category": this.category.val(),
-            "allergens": this.allergens.val()
+            "category": this.category.val()
         };
+        let allergens = this.allergens.val();
+        if (allergens.length > 0)
+            data["allergens"] = allergens;
         return data;
     }
 
