@@ -3,12 +3,12 @@ from django.urls import reverse_lazy
 from django.views.decorators.http import require_GET, require_POST
 from django.views.generic import FormView, TemplateView
 
-from restaurant.forms import IndexForm
+from restaurant import forms
 
 
 class IndexView(FormView):
     template_name = "restaurant/index.html"
-    form_class = IndexForm
+    form_class = forms.IndexForm
     success_url = reverse_lazy("restaurant:index")
 
     def form_valid(self, form):
@@ -24,6 +24,10 @@ class IndexView(FormView):
             "dishes": dishes,
             "allergens": allergens
         })
+
+    def get_context_data(self, **kwargs):
+        kwargs["create_dish_form"] = forms.CreateDishForm(prefix="create_dish")
+        return super().get_context_data(**kwargs)
 
 
 index = require_GET(IndexView.as_view())

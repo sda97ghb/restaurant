@@ -48,3 +48,9 @@ class GroupedModelMultipleChoiceField(GroupedModelChoiceMixin, ModelMultipleChoi
 class IndexForm(forms.Form):
     dishes = GroupedModelMultipleChoiceField(queryset=models.Dish.objects.all().select_related("category"),
                                              group_by="category", widget=CheckboxSelectMultiple)
+
+
+class CreateDishForm(forms.ModelForm):
+    class Meta:
+        model = models.Dish
+        fields = ["name", "nutritional_value", "price", "image", "category", "allergens"]

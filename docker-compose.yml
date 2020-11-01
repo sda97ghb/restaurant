@@ -11,6 +11,9 @@ services:
       - "8000:8000"
     networks:
       - restaurant_network
+    volumes:
+      - ./restaurant/:/opt/restaurant/restaurant/
+      - ./mediafiles/:/opt/restaurant/mediafiles/
     depends_on:
       - db
       - celery

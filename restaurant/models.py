@@ -29,8 +29,8 @@ class Dish(models.Model):
     name = models.CharField(max_length=100)
     nutritional_value = models.IntegerField()
     price = MoneyField(max_digits=10, decimal_places=2, default_currency="RUB")
-    image = models.ImageField(upload_to="restaurant/dish_image/")
-    allergens = models.ManyToManyField(Allergen)
+    image = models.ImageField(upload_to="restaurant/dish_image/", blank=True)
+    allergens = models.ManyToManyField(Allergen, blank=True)
     category = models.ForeignKey(DishCategory, on_delete=models.CASCADE)
     
     class Meta:
