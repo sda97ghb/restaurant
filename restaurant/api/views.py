@@ -9,12 +9,18 @@ from restaurant.api import serializers
 
 
 class CreatePastebinTaskView(APIView):
+    authentication_classes = []
+    permission_classes = []
+
     def post(self, request):
         res = tasks.create_paste.delay()
         return Response(res.id)
 
 
 class PastebinTaskView(APIView):
+    authentication_classes = []
+    permission_classes = []
+
     def get(self, request, task_id):
         res = AsyncResult(task_id)
         return Response({
