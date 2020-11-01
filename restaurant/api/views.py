@@ -1,5 +1,3 @@
-import re
-
 from celery.result import AsyncResult
 from rest_framework.generics import get_object_or_404, RetrieveAPIView, ListCreateAPIView
 from rest_framework.response import Response
@@ -29,16 +27,6 @@ class PastebinTaskView(APIView):
 class ListCreateDishView(ListCreateAPIView):
     queryset = models.Dish.objects.all()
     serializer_class = serializers.DishSerializer
-
-    def create(self, request, *args, **kwargs):
-        # multipart/form-data sends allergens like "1,2,3" which will be parsed as ["1,2,3"] and causes ValidationError.
-        # Solution: Manually convert it to [1, 2, 3].
-        if "allergens" in request.data:
-            allergens = request.data.getlist("allergens")
-            if len(allergens) == 1 and type(allergens[0]) == str and re.match(r"[0-9]+(,[0-9]+)*", allergens[0]):
-                allergens = list(map(int, request.data["allergens"].split(",")))
-                request.data.setlist("allergens", allergens)
-        return super().create(request, *args, **kwargs)
 
 
 class DishView(RetrieveAPIView):
