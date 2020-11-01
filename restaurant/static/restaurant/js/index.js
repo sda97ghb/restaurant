@@ -15,6 +15,8 @@ class CreateDishForm {
         this.category = findFormElement(prefix, "category");
         this.allergens = findFormElement(prefix, "allergens");
 
+        this.api_key = findFormElement(prefix, "api_key");
+
         this.errorMessage = findFormElement(prefix, "errorMessage");
 
         this.submitButton = findFormElement(prefix, "submit");
@@ -48,12 +50,16 @@ class CreateDishForm {
     submit () {
         for (const e of this.formData.entries()) {console.log(e)}
         let createDishUrl = this.action;
+        let apiKey = this.api_key.val();
         $.ajax({
             url: createDishUrl,
             type: "POST",
             data: this.formData,
             contentType: false,
-            processData: false
+            processData: false,
+            headers: {
+                "Authorization": `Bearer ${apiKey}`
+            }
         })
             .done((res) => {
                 alert(`Created dish with id ${res.id}`);

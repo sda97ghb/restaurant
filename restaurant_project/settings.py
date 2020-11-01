@@ -178,3 +178,17 @@ PASTEBIN_API_DEV_KEY = os.environ["PASTEBIN_API_DEV_KEY"]
 
 CELERY_BROKER_URL = os.environ["CELERY_BROKER_URL"]
 CELERY_RESULT_BACKEND = os.environ["CELERY_RESULT_BACKEND"]
+
+
+# API
+
+API_TOKEN = os.environ["API_TOKEN"]
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "restaurant.api.authentication.SettingsTokenAuthentication",
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+}
